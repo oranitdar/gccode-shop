@@ -11,7 +11,7 @@ import { PRODUCTS } from './mock-products';
 export class AppComponent {
   title:string = 'gocode-shop/ gccode';
 
-  product:Array<IProduct> = PRODUCTS;
+  products:Array<IProduct> = PRODUCTS;
 
   onToggle() {
     this.title = this.title ? '' : 'gocode-shop';

@@ -1,9 +1,22 @@
-<button (click)="onToggle()">Toggle</button><br/>
+<!-- <button (click)="onToggle()">Toggle</button><br/>
 Title: {{title}}<br/>
 One way binding: <input type="text" [value]="title"/><br/>
 Two way binding:  <input type="text" [(ngModel)]="title" /><br/>
 
-<input type="text" (input)="changeTitle($event)" [value]="title" />(Two Way separated)
+<input type="text" (input)="changeTitle($event)" [value]="title" />(Two Way separated) -->
+
+<section>
+    <ul>
+        <li *ngFor="let product of products">
+            Id: {{product.id}}<br/>
+            Title: {{product.title}}<br/>
+            Price: {{product.price | currency}}<br/>
+            Description: {{product.description}}<br/>
+            Category: {{product.category}}<br/>
+            <img [src]="product.image"/>
+        </li>
+    </ul>
+</section>
 
 <nav class="product-filter">
     <h1>Jackets</h1>
