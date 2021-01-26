@@ -1,0 +1,7 @@
+<button (click)="onToggle()">Toggle</button><br/>
+Title: {{title}}<br/>
+One way binding: <input type="text" [value]="title"/><br/>
+Two way binding:  <input type="text" [(ngModel)]="title" /><br/>
+
+<input type="text" (input)="changeTitle($event)" [value]="title" />(Two Way separated)
+
