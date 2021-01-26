@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title:string = 'gocode-shop or gccode';
+  title:string = 'gocode-shop/ gccode';
   onToggle() {
     this.title = this.title ? '' : 'gocode-shop';
   }
