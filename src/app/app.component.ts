@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IProduct } from './product';
 import { PRODUCTS } from './mock-products';
-
+import Utils from '../utils'
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { PRODUCTS } from './mock-products';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title:string = 'gocode-shop/ gccode';
+  title:string = 'gocode-shop/ gccode-shop';
 
   products:Array<IProduct> = PRODUCTS;
 
@@ -19,5 +19,7 @@ export class AppComponent {
   changeTitle(e: any) {
     this.title = (<HTMLInputElement>e.target).value;
   }
+
+  // categories = Object.keys(groupBy(products, 'category'));
 
 }
