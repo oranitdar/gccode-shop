@@ -25,8 +25,7 @@ export class AppComponent {
     this.title = (<HTMLInputElement>e.target).value;
   }
 
-  onCategoryChange(selected: string) {
+  onCategoryChange(selected:string) {
     this.selectedCatgeory = selected;
   }
-
 }

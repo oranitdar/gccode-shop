@@ -23,21 +23,14 @@ Two way binding:  <input type="text" [(ngModel)]="title" /><br/>
     <h1>Jackets only</h1>
 
     <div class="sort">
-      <div class="collection-sort">
+      <!-- <div>
         <label>Filter by:</label>
-        <!-- <select #categoriesSelect (change)="onCategoryChange(categoriesSelect.value)"> -->
         <select #categoriesSelect (change)="onCategoryChange(categoriesSelect.value)">
           <option value="/">All Jackets</option>
-          <!-- <option value="/">2016</option>
-          <option value="/">jacket</option>
-          <option value="/">Jackets</option>
-          <option value="/">layers</option>
-          <option value="/">Obermeyer</option>
-          <option value="/">Roxy</option>
-          <option value="/">womens</option> -->
           <option *ngFor="let category of categories" [value]="category">{{category}}</option>
         </select>
-      </div>
+      </div> -->
+      <app-products-filter class="collection-sort" [categories]="categories" (categorySelected)="onCategoryChange($event)"></app-products-filter>
 
       <div class="collection-sort">
         <label>Sort by:</label>
