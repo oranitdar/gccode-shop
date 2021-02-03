@@ -13,13 +13,20 @@ export class AppComponent {
 
   products:Array<IProduct> = PRODUCTS;
 
+  categories:Array<string> = Object.keys(Utils.groupBy(this.products, 'category'));
+
+  selectedCatgeory?:string = '';
+
   onToggle() {
     this.title = this.title ? '' : 'gocode-shop';
   }
+
   changeTitle(e: any) {
     this.title = (<HTMLInputElement>e.target).value;
   }
 
-  // categories = Object.keys(groupBy(products, 'category'));
+  onCategoryChange(selected: string) {
+    this.selectedCatgeory = selected;
+  }
 
 }

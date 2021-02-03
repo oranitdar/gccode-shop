@@ -25,15 +25,17 @@ Two way binding:  <input type="text" [(ngModel)]="title" /><br/>
     <div class="sort">
       <div class="collection-sort">
         <label>Filter by:</label>
-        <select>
+        <!-- <select #categoriesSelect (change)="onCategoryChange(categoriesSelect.value)"> -->
+        <select #categoriesSelect (change)="onCategoryChange(categoriesSelect.value)">
           <option value="/">All Jackets</option>
-          <option value="/">2016</option>
+          <!-- <option value="/">2016</option>
           <option value="/">jacket</option>
           <option value="/">Jackets</option>
           <option value="/">layers</option>
           <option value="/">Obermeyer</option>
           <option value="/">Roxy</option>
-          <option value="/">womens</option>
+          <option value="/">womens</option> -->
+          <option *ngFor="let category of categories" [value]="category">{{category}}</option>
         </select>
       </div>
 
@@ -53,16 +55,23 @@ Two way binding:  <input type="text" [(ngModel)]="title" /><br/>
     </div>
   </nav>
 
+  <!--<section *ngIf="products">
+    <ng-container class="products" *ngFor="let product of products">
+       <div class="product-card" *ngIf="!selectedCatgeory || product.category == selectedCatgeory">
+        <div class="product-image">
+          <img [src]="product.image"/>
+        </div>
+        <div class="product-info">
+          <h5>{{product.title}}</h5>
+          <h6>{{product.price | currency}}</h6>
+        </div>
+      </div> 
+    </ng-container>
+  </section>-->
   <section class="products">
-    <div class="product-card" *ngFor="let product of products">
-      <div class="product-image">
-        <img [src]="product.image"/>
-      </div>
-      <div class="product-info">
-        <h5>{{product.title}}</h5>
-        <h6>{{product.price | currency}}</h6>
-      </div>
-    </div>
-
-    
+    <ng-container *ngFor="let product of products" class="'products','product-card'">
+      <app-product-details class="product-card"
+       *ngIf="!selectedCatgeory || product.category == selectedCatgeory" [product]="product">
+      </app-product-details>
+    </ng-container>
   </section>
