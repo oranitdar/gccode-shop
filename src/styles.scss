@@ -245,6 +245,24 @@ label {
   text-align: center;
 }
 
+.messages {
+  border: solid 1px #a5a5a5;
+  border-radius: 5px;
+  margin: 2rem 1rem;
+  padding: 1rem;
+  .messages-header {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 700; 
+  }
+  .clear {
+    margin-bottom: 1rem;
+  }
+  .message-line {
+    margin-top: 0.5rem;
+  }
+}
+
 @media (max-width: 920px) {
   .product-card {
     flex: 1 21%;

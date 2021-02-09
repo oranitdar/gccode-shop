@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsFilterComponent } from './products-filter/products-filter.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductDetailsComponent,
-    ProductsFilterComponent
+    ProductsFilterComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

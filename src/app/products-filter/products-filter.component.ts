@@ -8,13 +8,16 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 export class ProductsFilterComponent implements OnInit {
   @Input() categories: Array<string>;
   @Output() categorySelected = new EventEmitter<string>();
+
+  selectedCatgeory?:string = '';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onCategoryChange(selected: string) {
-    this.categorySelected.emit(selected);
+  onCategoryChange() {
+    this.categorySelected.emit(this.selectedCatgeory);
   }
   
 }

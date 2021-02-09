@@ -63,8 +63,12 @@ Two way binding:  <input type="text" [(ngModel)]="title" /><br/>
   </section>-->
   <section class="products">
     <ng-container *ngFor="let product of products" class="'products','product-card'">
-      <app-product-details class="product-card"
-       *ngIf="!selectedCatgeory || product.category == selectedCatgeory" [product]="product">
+      <!-- `Product ${product.title} selected` -->
+      <app-product-details class="product-card" (click)="messageService.add('Product selected: ' + product.title)"
+       *ngIf="!selectedCatgeory || product.category === selectedCatgeory" [product]="product">
       </app-product-details>
     </ng-container>
+  </section>
+  <section>
+    <app-messages></app-messages>
   </section>

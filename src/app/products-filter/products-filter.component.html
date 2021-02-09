@@ -1,13 +1,16 @@
 <label>Filter by:</label>
-        <!-- <select #categoriesSelect (change)="onCategoryChange(categoriesSelect.value)"> -->
-        <select #categoriesSelect (change)="onCategoryChange(categoriesSelect.value)">
-          <option value="">All Jackets</option>
-          <!-- <option value="/">2016</option>
+<!-- <select #categoriesSelect (change)="onCategoryChange(categoriesSelect.value)"> -->
+<!-- <select #categoriesSelect (change)="onCategoryChange(#event)"> -->
+  <select (change)="onCategoryChange()" [(ngModel)]="selectedCatgeory">
+  <option value="">All Jackets</option>
+  <!-- <option value="/">2016</option>
           <option value="/">jacket</option>
           <option value="/">Jackets</option>
           <option value="/">layers</option>
           <option value="/">Obermeyer</option>
           <option value="/">Roxy</option>
           <option value="/">womens</option> -->
-          <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-        </select>
+  <option *ngFor="let category of categories" [value]="category">
+    {{ category }}
+  </option>
+</select>

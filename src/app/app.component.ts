@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
-import { PRODUCTS } from './mock-products';
+import { ProductService } from './product.service';
+import { MessageService } from './message.service'
 import Utils from '../utils'
 
 @Component({
@@ -8,14 +9,30 @@ import Utils from '../utils'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title:string = 'gocode-shop/ gccode-shop';
 
-  products:Array<IProduct> = PRODUCTS;
+  products?:IProduct[];
 
-  categories:Array<string> = Object.keys(Utils.groupBy(this.products, 'category'));
+  categories:string[] = [];
 
   selectedCatgeory?:string = '';
+
+  constructor (private productService:ProductService, public messageService:MessageService) {
+    
+  }
+
+  ngOnInit(): void {
+    this.getProducts();
+  }
+
+  getProducts() {
+    this.productService.getProducts().subscribe(products => {
+      this.products = products;
+      this.categories = Object.keys(Utils.groupBy(products, 'category'));
+    });
+    
+  }
 
   onToggle() {
     this.title = this.title ? '' : 'gocode-shop';
