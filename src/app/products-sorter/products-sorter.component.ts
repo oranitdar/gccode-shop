@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-products-sorter',
@@ -6,6 +6,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./products-sorter.component.scss']
 })
 export class ProductsSorterComponent implements OnInit {
+  
   @Output() sortSelectedOutput = new EventEmitter<string>();
 
   selectedSortProp?:string;
@@ -17,6 +18,7 @@ export class ProductsSorterComponent implements OnInit {
 
   onSortChange() {
     this.sortSelectedOutput.emit(this.selectedSortProp);
+    //this.$emit('sortSelectedOutput',this.selectedSortProp)
   }
 
 }

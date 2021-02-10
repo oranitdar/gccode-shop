@@ -11,6 +11,7 @@ Two way binding:  <input type="text" [(ngModel)]="title" /><br/>
     <div class="sort">
       <app-products-filter class="collection-sort" [categories]="categories" (categorySelected)="onCategoryChange($event)"></app-products-filter>
       <app-products-sorter class="collection-sort" (sortSelectedOutput)="onSortChange($event)"></app-products-sorter>
+      <!-- @sortSelectedOutput="onSortChange($event)" -->
     </div>
   </nav>
 
