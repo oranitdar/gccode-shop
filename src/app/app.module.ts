@@ -7,13 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsFilterComponent } from './products-filter/products-filter.component';
 import { MessagesComponent } from './messages/messages.component';
+import { ProductsSorterComponent } from './products-sorter/products-sorter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductDetailsComponent,
     ProductsFilterComponent,
-    MessagesComponent
+    MessagesComponent,
+    ProductsSorterComponent
   ],
   imports: [
     BrowserModule,

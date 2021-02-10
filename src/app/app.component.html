@@ -4,71 +4,23 @@ One way binding: <input type="text" [value]="title"/><br/>
 Two way binding:  <input type="text" [(ngModel)]="title" /><br/>
 
 <input type="text" (input)="changeTitle($event)" [value]="title" />(Two Way separated) -->
-<!-- <section class="products">
-    <div class="product-card">
-        <ul>
-            <li *ngFor="let product of products">
-                Id: {{product.id}}<br/>
-                Title: {{product.title}}<br/>
-                Price: {{product.price | currency}}<br/>
-                Description: {{product.description}}<br/>
-                Category: {{product.category}}<br/>
-                <img [src]="product.image"/>
-            </li>
-        </ul>
-    </div>
-</section> -->
 
 <nav class="product-filter">
     <h1>Jackets only</h1>
 
     <div class="sort">
-      <!-- <div>
-        <label>Filter by:</label>
-        <select #categoriesSelect (change)="onCategoryChange(categoriesSelect.value)">
-          <option value="/">All Jackets</option>
-          <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-        </select>
-      </div> -->
       <app-products-filter class="collection-sort" [categories]="categories" (categorySelected)="onCategoryChange($event)"></app-products-filter>
-
-      <div class="collection-sort">
-        <label>Sort by:</label>
-        <select>
-          <option value="/">Featured</option>
-          <option value="/">Best Selling</option>
-          <option value="/">Alphabetically, A-Z</option>
-          <option value="/">Alphabetically, Z-A</option>
-          <option value="/">Price, low to high</option>
-          <option value="/">Price, high to low</option>
-          <option value="/">Date, new to old</option>
-          <option value="/">Date, old to new</option>
-        </select>
-      </div>
+      <app-products-sorter class="collection-sort" (sortSelectedOutput)="onSortChange($event)"></app-products-sorter>
     </div>
   </nav>
 
-  <!--<section *ngIf="products">
-    <ng-container class="products" *ngFor="let product of products">
-       <div class="product-card" *ngIf="!selectedCatgeory || product.category == selectedCatgeory">
-        <div class="product-image">
-          <img [src]="product.image"/>
-        </div>
-        <div class="product-info">
-          <h5>{{product.title}}</h5>
-          <h6>{{product.price | currency}}</h6>
-        </div>
-      </div> 
-    </ng-container>
-  </section>-->
   <section class="products">
     <ng-container *ngFor="let product of products" class="'products','product-card'">
-      <!-- `Product ${product.title} selected` -->
-      <app-product-details class="product-card" (click)="messageService.add('Product selected: ' + product.title)"
+      <app-product-details class="product-card" (click)="onProductSelected(product)"
        *ngIf="!selectedCatgeory || product.category === selectedCatgeory" [product]="product">
       </app-product-details>
     </ng-container>
   </section>
   <section>
-    <app-messages></app-messages>
+    <app-messages #messages></app-messages>
   </section>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IProduct } from './product';
 import { ProductService } from './product.service';
 import { MessageService } from './message.service'
@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
 
   selectedCatgeory?:string = '';
 
+  @ViewChild("messages") messagesView: ElementRef;
+
   constructor (private productService:ProductService, public messageService:MessageService) {
     
   }
@@ -31,7 +33,6 @@ export class AppComponent implements OnInit {
       this.products = products;
       this.categories = Object.keys(Utils.groupBy(products, 'category'));
     });
-    
   }
 
   onToggle() {
@@ -45,4 +46,30 @@ export class AppComponent implements OnInit {
   onCategoryChange(selected:string) {
     this.selectedCatgeory = selected;
   }
+
+  onSortChange(sortCode:string) {
+    if (this.products) {
+      if (sortCode == 'NameAsc') {
+        this.products.sort((a, b) => a.title.localeCompare(b.title));
+      }
+      else if (sortCode == 'NameDesc') {
+        this.products.sort((a, b) => b.title.localeCompare(a.title));
+      }
+      else if (sortCode == 'PriceAsc') {
+        this.products.sort((a, b) => { return a.price - b.price});
+      }
+      else if (sortCode == 'PriceDesc') {
+        this.products.sort((a, b) => { return b.price - a.price});
+      }
+    }
+  }
+
+  onProductSelected(product:IProduct) {
+    this.messageService.add('Product selected: ' + product.title)
+    //this.messagesView.nativeElement.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // ngAfterViewInit() {
+  //   this.messagesView.nativeElement.scollToView();
+  // }
 }
