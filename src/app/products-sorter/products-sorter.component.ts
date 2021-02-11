@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { from } from 'rxjs';
+import { ISorter, SortType, SortOrder } from './../sorter'
 
 @Component({
   selector: 'app-products-sorter',
@@ -7,7 +9,7 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 })
 export class ProductsSorterComponent implements OnInit {
   
-  @Output() sortSelectedOutput = new EventEmitter<string>();
+  @Output() sortSelectedOutput = new EventEmitter<ISorter>();
 
   selectedSortProp?:string;
 
@@ -17,7 +19,18 @@ export class ProductsSorterComponent implements OnInit {
   }
 
   onSortChange() {
-    this.sortSelectedOutput.emit(this.selectedSortProp);
+    if (!this.selectedSortProp) {
+      return;
+    }
+    const selectedSorter:ISorter = {field: 'title', type: SortType.STRING, order: SortOrder.ASC};
+    if (this.selectedSortProp?.includes('Price')) {
+      selectedSorter.field = 'price';
+      selectedSorter.type = SortType.NUMBER;
+    }
+    if (this.selectedSortProp?.includes('Desc')) {
+      selectedSorter.order = SortOrder.DESC;
+    }
+    this.sortSelectedOutput.emit(selectedSorter);
     //this.$emit('sortSelectedOutput',this.selectedSortProp)
   }
 

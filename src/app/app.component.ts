@@ -3,6 +3,7 @@ import { IProduct } from './product';
 import { ProductService } from './product.service';
 import { MessageService } from './message.service'
 import Utils from '../utils'
+import { ISorter, SortOrder, SortType } from './sorter';
 
 @Component({
   selector: 'app-root',
@@ -47,20 +48,9 @@ export class AppComponent implements OnInit {
     this.selectedCatgeory = selected;
   }
 
-  onSortChange(sortCode:string) {
+  onSortChange(selectedSorter:ISorter) {
     if (this.products) {
-      if (sortCode == 'NameAsc') {
-        this.products.sort((a, b) => a.title.localeCompare(b.title));
-      }
-      else if (sortCode == 'NameDesc') {
-        this.products.sort((a, b) => b.title.localeCompare(a.title));
-      }
-      else if (sortCode == 'PriceAsc') {
-        this.products.sort((a, b) => { return a.price - b.price});
-      }
-      else if (sortCode == 'PriceDesc') {
-        this.products.sort((a, b) => { return b.price - a.price});
-      }
+      this.products = Utils.sortArr(this.products, selectedSorter.field, selectedSorter.type, selectedSorter.order);
     }
   }
 
