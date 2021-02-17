@@ -1,0 +1,14 @@
+<!-- <div class="go-back" (click)="goBack()">< BACK</div> -->
+<div class="breadcrumbs">
+    <div class="non-active" (click)="goBack()">Main</div>
+    <div>></div>
+    <div class="active">{{ product.title }}</div>
+</div>
+<div class="product-image-page" v-if="product">
+    <img class="img-of-product" [src]="product.image" />
+  </div>
+  <div class="product-info">
+    <div class="title">{{ product.title }}</div>
+    <div class="description">{{ product.description }}</div>
+    <div class="price">{{ product.price | currency }}</div>
+</div>

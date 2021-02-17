@@ -13,6 +13,11 @@ export class ProductService {
 
   }
 
+  getProduct(id:number): Observable<IProduct> {
+    this.messageService.add(`ProductService | getProduct By id = ${id}`);
+    return of(<IProduct>PRODUCTS.find(product => product.id === id));
+  }
+
   getProducts(): Observable<IProduct[]> {
     this.messageService.add(`ProductService | getProducts | fetched ${PRODUCTS.length} products`);
     return of(PRODUCTS);

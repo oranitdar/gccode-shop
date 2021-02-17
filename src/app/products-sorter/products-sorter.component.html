@@ -2,10 +2,14 @@
 <select [(ngModel)]="selectedSortProp" (change)="onSortChange()">
   <!-- <option value="/">Featured</option>
        <option value="/">Best Selling</option> -->
-  <option value="TitleAsc">Alphabetically, A-Z</option>
+  <!-- <option value="TitleAsc">Alphabetically, A-Z</option>
   <option value="TitleDesc">Alphabetically, Z-A</option>
   <option value="PriceAsc">Price, low to high</option>
-  <option value="PriceDesc">Price, high to low</option>
+  <option value="PriceDesc">Price, high to low</option> -->
+  <option [ngValue]="sortingOptions[0]">Alphabetically, A-Z</option>
+  <option [ngValue]="sortingOptions[1]">Alphabetically, Z-A</option>
+  <option [ngValue]="sortingOptions[2]">Price, low to high</option>
+  <option [ngValue]="sortingOptions[3]">Price, high to low</option>
   <!-- <option value="/">Date, new to old</option>
        <option value="/">Date, old to new</option> -->
 </select>

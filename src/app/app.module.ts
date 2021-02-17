@@ -8,6 +8,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductsFilterComponent } from './products-filter/products-filter.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ProductsSorterComponent } from './products-sorter/products-sorter.component';
+import { ProductPageComponent } from './product-page/product-page.component';
+import { MainPageComponent } from './main-page/main-page.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ProductsSorterComponent } from './products-sorter/products-sorter.compo
     ProductDetailsComponent,
     ProductsFilterComponent,
     MessagesComponent,
-    ProductsSorterComponent
+    ProductsSorterComponent,
+    ProductPageComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,

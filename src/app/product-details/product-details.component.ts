@@ -8,7 +8,7 @@ import { IProduct } from '../product';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-  @Input() product: IProduct;
+  @Input() product?: IProduct;
   constructor() { }
 
   ngOnInit(): void {

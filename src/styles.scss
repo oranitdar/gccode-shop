@@ -227,6 +227,7 @@ label {
 .product-card {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 
   padding: 2%;
   flex: 1 16%;
@@ -243,6 +244,26 @@ label {
   margin-top: auto;
   padding-top: 20px;
   text-align: center;
+  .title{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  .description {
+    line-height: 1.2;
+  }
+  .price {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+}
+
+.product-image-page {
+  display: flex;
+  justify-content: center;
+  img {
+    width: 30%;
+  }
 }
 
 .messages {
@@ -260,6 +281,34 @@ label {
   }
   .message-line {
     margin-top: 0.5rem;
+  }
+}
+
+.go-back {
+  font-size: 2rem;
+  // border: solid 2px #a5a5a5;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  width: 7rem;
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
+}
+
+.breadcrumbs {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 0.5rem;
+  margin: 1rem 0;
+  .active {
+    font-weight: 700;
+  }
+  .non-active {
+    cursor: pointer;
+    text-decoration: underline;
   }
 }
 

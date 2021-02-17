@@ -1,0 +1,27 @@
+<!-- <button (click)="onToggle()">Toggle</button><br/>
+Title: {{title}}<br/>
+One way binding: <input type="text" [value]="title"/><br/>
+Two way binding:  <input type="text" [(ngModel)]="title" /><br/>
+
+<input type="text" (input)="changeTitle($event)" [value]="title" />(Two Way separated) -->
+
+<nav class="product-filter">
+    <h1>Jackets only</h1>
+
+    <div class="sort">
+      <app-products-filter class="collection-sort" [categories]="categories" (categorySelected)="onCategoryChange($event)"></app-products-filter>
+      <app-products-sorter class="collection-sort" (sortSelectedOutput)="onSortChange($event)"></app-products-sorter>
+      <!-- @sortSelectedOutput="onSortChange($event)" -->
+    </div>
+</nav>
+
+  <section class="products">
+    <ng-container *ngFor="let product of products" class="'products','product-card'">
+      <app-product-details class="product-card" (click)="onProductSelected(product)" 
+       routerLink="/products/{{product.id}}"
+       *ngIf="!selectedCatgeory || product.category === selectedCatgeory" [product]="product">
+      </app-product-details>
+    </ng-container>
+  </section>
+
+  
