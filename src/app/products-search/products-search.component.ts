@@ -14,6 +14,7 @@ import {
 } from 'rxjs/operators';
 import { IProduct } from '../product';
 import { ProductService } from './../product.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-products-search',
@@ -25,7 +26,7 @@ export class ProductsSearchComponent implements OnInit {
   public products$: Observable<IProduct[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private location: Location) { }
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -48,11 +49,12 @@ export class ProductsSearchComponent implements OnInit {
       // most recent HTTP method call. Results from prior calls are canceled and discarded.
       // Note that cancelling a previous search call, Observable doesn't actually abort a pending HTTP request.
       // Unwanted results are simply discarded before they reach your application code.
-      switchMap((term: string) => this.productService.searchProduct(term)),
-
-      
+      switchMap((term: string) => this.productService.searchProduct(term)),   
 
     );
   }
   
+  goBack() {
+    this.location.back();
+  }
 }
