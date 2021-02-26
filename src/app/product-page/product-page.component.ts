@@ -27,11 +27,13 @@ export class ProductPageComponent implements OnInit {
     });
   }
 
-  
-
   getProduct() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.productService.getProduct(id).subscribe(product => this.product = product);
+  }
+
+  updateProduct(): void {
+    this.productService.updateProduct(this.product).subscribe(() => this.goBack());
   }
 
   goBack() {

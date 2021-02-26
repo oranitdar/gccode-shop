@@ -66,4 +66,19 @@ export class MainPageComponent implements OnInit {
   //   this.messagesView.nativeElement.scollToView();
   // }
 
+  addProduct(title: string): void {
+    title = title.trim();
+    if (!title) { return; }
+    //title short for: title: title
+    this.productService.addProduct({title} as IProduct).subscribe(newProduct => {
+      this.products.push(newProduct);
+    });
+  }
+
+  deleteProduct(product: IProduct) { 
+    this.productService.deleteProduct(product).subscribe(() =>
+      this.products = this.products.filter(p => p !== product)
+    );
+  }
+
 }
