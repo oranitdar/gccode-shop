@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { IProduct } from '../product';
 
 
@@ -9,10 +10,12 @@ import { IProduct } from '../product';
 })
 export class ProductDetailsComponent implements OnInit {
   @Input() product?: IProduct;
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
 
   }
+
+
 
 }

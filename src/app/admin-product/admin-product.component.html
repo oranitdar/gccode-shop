@@ -1,0 +1,55 @@
+<div class="breadcrumbs">
+  <div class="non-active" (click)="goBack()">Admin Main</div>
+  <div>></div>
+  <div class="active">Prodcut Details - {{ idOrNew }}</div>
+</div>
+<form [formGroup]="productForm" class="product-form" (ngSubmit)="onSubmit()">
+  <label>
+    Title:
+    <input type="text" formControlName="title" />
+  </label>
+  <label>
+    Price:
+    <input type="text" formControlName="price" />
+  </label>
+  <label>
+    Description:
+    <input type="text" formControlName="description" />
+  </label>
+  <label>
+    Category:
+    <input type="text" formControlName="category" />
+  </label>
+  <label>
+    Link to Image:
+    <input type="text" formControlName="image" />
+  </label>
+  <div class="button-container">
+    <button type="submit" [disabled]="!productForm.valid">Save!</button>
+    <button *ngIf="this.productId" (click)="updatePrice()">
+      Update price only...
+    </button>
+  </div>
+</form>
+<h1>Using Form Builder</h1>
+<form class="product-form" [formGroup]="userFb">
+  <label>
+    Name:
+    <input type="text" formControlName="name" required />
+  </label>
+  <div formGroupName="address">
+    <h3>Address</h3>
+    <label>
+      Street:
+      <input type="text" formControlName="street" />
+    </label>
+    <label>
+      City:
+      <input type="text" formControlName="city" />
+    </label>
+  </div>
+  <div class="button-container">
+    <button type="submit" [disabled]="!userFb.valid">Submit</button>
+  </div>
+</form>
+<p>Form Status: {{ userFb.status }}</p>

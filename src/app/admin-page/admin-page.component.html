@@ -1,0 +1,18 @@
+<div class="page-header">
+    <h1>Welcome Admin!</h1>
+    <div class="search-button" routerLink="/add">Add Product</div>
+</div>
+
+<section class="products">
+  <ng-container
+    *ngFor="let product of products"
+    class="'products','product-card'"
+  >
+    <app-product-details
+      class="product-card"
+      routerLink="/products/{{ product.id }}"
+      [product]="product"
+    >
+    </app-product-details>
+  </ng-container>
+</section>

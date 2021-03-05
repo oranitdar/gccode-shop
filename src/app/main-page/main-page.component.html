@@ -6,12 +6,13 @@ Two way binding:  <input type="text" [(ngModel)]="title" /><br/>
 <input type="text" (input)="changeTitle($event)" [value]="title" />(Two Way separated) -->
 
 <nav class="product-filter">
-    <h1>Jackets only</h1>
+    <h1>Shop Products</h1>
 
     <div class="sort">
       <app-products-filter class="collection-sort" [categories]="categories" (categorySelected)="onCategoryChange($event)"></app-products-filter>
       <app-products-sorter class="collection-sort" (sortSelectedOutput)="onSortChange($event)"></app-products-sorter>
       <div class="search-button" routerLink="/search">Search</div>
+      <div class="search-button" routerLink="/admin">Admin?</div>
       <!-- @sortSelectedOutput="onSortChange($event)" -->
     </div>
 </nav>
