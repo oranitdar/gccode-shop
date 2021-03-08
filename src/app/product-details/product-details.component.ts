@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { IProduct } from '../product';
-
+import { ProductService } from '../product.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
@@ -10,12 +11,17 @@ import { IProduct } from '../product';
 })
 export class ProductDetailsComponent implements OnInit {
   @Input() product?: IProduct;
-  constructor(public router: Router) { }
+  constructor(public router: Router, private location: Location, private productService: ProductService) { }
 
   ngOnInit(): void {
 
   }
 
-
+  deleteProduct(productId:number) {
+    this.productService.deleteProduct(productId).subscribe(ret => {
+      //console.log(`ret = ${ret}`);
+      this.location.back();
+    });
+  }
 
 }

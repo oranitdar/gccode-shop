@@ -6,6 +6,6 @@
   <h6>{{ product.price | currency }}</h6>
   <div *ngIf="this.router.url === '/admin'" class="admin-buttons">
     <div class="search-button" routerLink="/edit/{{product.id}}">Edit</div>
-    <div class="search-button">Delete</div>
+    <div class="search-button" (click)="deleteProduct(product.id)">Delete</div>
   </div>
 </div>

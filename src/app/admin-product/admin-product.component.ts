@@ -25,15 +25,11 @@ export class AdminProductComponent implements OnInit {
     description: new FormControl(''),
     category: new FormControl(''),
     image: new FormControl(''),
-    // address: new FormGroup({
-    //   street: new FormControl(''),
-    //   city: new FormControl(''),
-    // })
   });
 
   userFb = this.fb.group({
     id: [],
-    name: ['', Validators.required],
+    name: ['', [Validators.required, Validators.minLength(2)]],
     address: this.fb.group({
       street: [''],
       city: [''],
@@ -60,11 +56,33 @@ export class AdminProductComponent implements OnInit {
       this.productService.getProduct(this.productId).subscribe((product) => {
         this.product = product;
         this.idOrNew = this.productId ? String(this.product.id) : 'New';
+        // this.productForm.controls['title'].setValue(product.title);
+        // this.productForm.controls['price'].setValue(product.price);
+        // this.productForm.controls['description'].setValue(product.description);
+        // this.productForm.controls['category'].setValue(product.category);
+        // this.productForm.controls['image'].setValue(product.image);
+        this.productForm.patchValue({title: product.title, 
+          price: product.price, 
+          description: product.description, 
+          category: product.category, 
+          image: product.image});
       });
     }
   }
 
-  onSubmit() {}
+  onSubmit() {
+    if (this.productId) {
+      this.productService.updateProduct(this.product).subscribe((product) => {
+        console.log(`Edited: product: ${this.product.title}`);
+      });;
+    }
+    else {
+      this.productService.addProduct(this.product).subscribe(product => {
+        console.log(`Added: product: ${this.product.title}`);
+      });
+  
+    }
+  }
 
   //Programatically partial update of the object (e.g: from the server)
   updatePrice() {
