@@ -18,10 +18,12 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   deleteProduct(productId:number) {
-    this.productService.deleteProduct(productId).subscribe(ret => {
-      //console.log(`ret = ${ret}`);
-      this.location.back();
-    });
+    if(confirm(`Are you sure to delete product number ${productId}?`)) {
+      this.productService.deleteProduct(productId).subscribe(ret => {
+        //console.log(`ret = ${ret}`);
+        this.location.back();
+      });
+    }
   }
 
 }
