@@ -15,7 +15,7 @@ import { FormBuilder } from '@angular/forms';
 export class AdminProductComponent implements OnInit {
   product?: IProduct;
   productId?: number;
-  pageTitle:string = 'Prodct Page';
+  pageTitle:string = 'Prodct';
 
   idOrNew: string;
 
