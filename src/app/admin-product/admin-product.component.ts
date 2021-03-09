@@ -94,7 +94,7 @@ export class AdminProductComponent implements OnInit {
   //Programatically partial update of the object (e.g: from the server)
   updatePrice() {
     this.productForm.patchValue({
-      price: '100',
+      price: '99.99',
       // address: {
       //   street: '123 Drew Street'
       // }
