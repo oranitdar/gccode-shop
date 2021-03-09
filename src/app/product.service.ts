@@ -26,7 +26,19 @@ export class ProductService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };  
 
-  
+  private productsList:IProduct[] = [];
+
+  public get ProductsList() : IProduct[] {
+    return this.productsList;
+  }
+  public set ProductsList(value : IProduct[]) {
+    this.productsList = value;
+  } 
+
+  private getNextProductId():number {
+    return (Math.max.apply(Math, this.ProductsList.map(function(o) { return o.id; }))) + 1;
+  }
+
   /** Log a ProductService message with the MessageService **/
   private log(message: string) {
     this.messageService.add(`ProductService: ${message}`);
@@ -58,26 +70,43 @@ export class ProductService {
   }
 
   getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.productsUrl).pipe(
-      //_ means that there are params, but we are not interested in them
-      //tap - before the client of the server subscribes, called whenever the service is consumed
-      //actions written here will be taking whenever any consumer calls the service
-      tap(_ => this.log(`getProducts | fetched ${PRODUCTS.length} products`)),
-      catchError(this.handleError<IProduct[]>('getProducts', []))
-    );
+    if (this.ProductsList.length == 0) {
+      return this.http.get<IProduct[]>(this.productsUrl).pipe(
+        //_ means that there are params, but we are not interested in them
+        //tap - before the client of the server subscribes, called whenever the service is consumed
+        //actions written here will be taking whenever any consumer calls the service
+        tap(serviceProducts => {
+          this.log(`getProducts | fetched ${PRODUCTS.length} products`);
+          this.ProductsList = serviceProducts;
+        }),
+        catchError(this.handleError<IProduct[]>('getProducts', []))
+      );
+    }
+    else {
+      return of (this.ProductsList);
+    }
   }
 
   //Using http.put() to persist the changed hero on the server
   updateProduct(product: IProduct): Observable<any> {
+    //In real life - put inside the pipe
+    let itemIndex = this.ProductsList.findIndex(item => item.id == product.id);
+    this.ProductsList[itemIndex] = product;
     return this.http.put(this.productsUrl, product, this.httpOptions).pipe(
-      tap(_ => this.log(`updateProduct | updated product  id=${product.id}`)),
+      tap(_ => {
+        this.log(`updateProduct | updated product  id=${product.id}`);
+      }),
       catchError(this.handleError<any>('updateProduct'))
     );  
   }
 
   addProduct(product: IProduct): Observable<IProduct> {
     return this.http.post<IProduct>(this.productsUrl, product, this.httpOptions).pipe(
-      tap((newProduct:IProduct) => this.log(`addProduct | added product w/ id=${newProduct.id}`)),
+      tap((newProduct:IProduct) => {
+        this.log(`addProduct | added product w/ id=${newProduct.id}`);
+        product.id = this.getNextProductId();
+        this.ProductsList.push(product);
+      }),
       catchError(this.handleError<IProduct>('addProduct'))
     );
   }
@@ -86,7 +115,10 @@ export class ProductService {
     const id = typeof product === 'number' ? product : product.id;
     const url = `${this.productsUrl}/${id}`;
     return this.http.delete<IProduct>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleteProduct | deleted product id = ${id}`)),
+      tap(_ => {
+        this.log(`deleteProduct | deleted product id = ${id}`);
+        this.ProductsList = this.ProductsList.filter(obj => obj.id !== id);
+      }),
       catchError(this.handleError<IProduct>('deleteProduct'))
     );
   }

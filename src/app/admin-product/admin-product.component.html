@@ -1,9 +1,10 @@
 <div class="breadcrumbs">
   <div class="non-active" (click)="goBack()">Admin Main</div>
   <div>></div>
-  <div class="active">Prodcut Details - {{ idOrNew }}</div>
+  <div class="active">{{ pageTitle }}</div>
 </div>
 <form [formGroup]="productForm" class="product-form" (ngSubmit)="onSubmit()">
+  
   <label>
     Title:
     <input type="text" formControlName="title" />

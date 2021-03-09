@@ -15,6 +15,7 @@ import { FormBuilder } from '@angular/forms';
 export class AdminProductComponent implements OnInit {
   product?: IProduct;
   productId?: number;
+  pageTitle:string = 'Prodct';
 
   idOrNew: string;
 
@@ -55,32 +56,38 @@ export class AdminProductComponent implements OnInit {
     if (this.productId) {
       this.productService.getProduct(this.productId).subscribe((product) => {
         this.product = product;
-        this.idOrNew = this.productId ? String(this.product.id) : 'New';
+        this.pageTitle = `Edit Product ${this.product.id}`;
         // this.productForm.controls['title'].setValue(product.title);
         // this.productForm.controls['price'].setValue(product.price);
         // this.productForm.controls['description'].setValue(product.description);
         // this.productForm.controls['category'].setValue(product.category);
         // this.productForm.controls['image'].setValue(product.image);
-        this.productForm.patchValue({title: product.title, 
+        this.productForm.patchValue({id: product.id,
+          title: product.title, 
           price: product.price, 
           description: product.description, 
           category: product.category, 
-          image: product.image});
+          image: product.image
+        });
       });
+    }
+    else {
+      this.pageTitle = 'Add Product';
     }
   }
 
   onSubmit() {
     if (this.productId) {
-      this.productService.updateProduct(this.product).subscribe((product) => {
-        console.log(`Edited: product: ${this.product.title}`);
+      this.productService.updateProduct(this.productForm.value).subscribe((product) => {
+        console.log(`Edited: product: ${this.productForm.value.title}`);
+        this.goBack();
       });;
     }
     else {
-      this.productService.addProduct(this.product).subscribe(product => {
-        console.log(`Added: product: ${this.product.title}`);
+      this.productService.addProduct(this.productForm.value).subscribe(product => {
+        console.log(`Added: product: ${this.productForm.value.title}`);
+        this.goBack();
       });
-  
     }
   }
 
